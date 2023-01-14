@@ -1,0 +1,210 @@
+// code to add two linked list and return the answer in linked list..
+class Solution
+{
+private:
+    Node *reverse(Node *&head)
+    {
+        Node *curr = head;
+        Node *prev = NULL;
+        Node *next = NULL;
+
+        while (curr != NULL)
+        {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    void attail(struct Node *&head, struct Node *&tail, int val)
+    {
+        Node *temp = new Node(val);
+        // if list is empty..
+        if (head == NULL)
+        {
+            head = temp;
+            tail = temp;
+        }
+        else
+        {
+            tail->next = temp;
+            tail = temp;
+        }
+    }
+
+    struct Node *add(struct Node *first, struct Node *second)
+    {
+        Node *ansHead = NULL;
+        Node *ansTail = NULL;
+        int carry = 0;
+        while (first != NULL && second != NULL)
+        {
+            int sum = carry + first->data + second->data;
+            int digit = sum % 10;
+
+            // found digit and create new node and add it in answer wala linked list..
+
+            attail(ansHead, ansTail, digit);
+            carry = sum / 10;
+            first = first->next;
+            second = second->next;
+        }
+
+        while (first != NULL)
+        {
+            int sum = carry + first->data + second->data;
+            int digit = sum % 10;
+
+            // found digit and create new node and add it in answer wala linked list..
+
+            attail(ansHead, ansTail, digit);
+            carry = sum / 10;
+            first = first->next;
+        }
+
+        while (second != NULL)
+        {
+            int sum = carry + first->data + second->data;
+            int digit = sum % 10;
+
+            // found digit and create new node and add it in answer wala linked list..
+
+            attail(ansHead, ansTail, digit);
+            carry = sum / 10;
+            second = second->next;
+        }
+
+        while (carry != 0)
+        {
+            int sum = carry + first->data + second->data;
+            int digit = sum % 10;
+
+            // found digit and create new node and add it in answer wala linked list..
+
+            attail(ansHead, ansTail, digit);
+            carry = sum / 10;
+        }
+
+        return ansHead;
+    }
+
+public:
+    // Function to add two numbers represented by linked list.
+    struct Node *addTwoLists(struct Node *first, struct Node *second)
+    {
+        // step 1 -> reverse both the linked list..
+        first = reverse(first);
+        second = reverse(second);
+
+        // step 2 -> add both the link list..
+        Node *ans = add(first, second);
+
+        // step3 -> reverse the ans..
+        ans = reverse(ans);
+
+        // step 4 -> return the ans..
+        return ans;
+    }
+};
+
+// below is optimised sollution..
+
+/*
+class Solution
+{
+    private :
+     Node *reverse(Node *&head)
+    {
+        Node *curr = head;
+        Node *prev = NULL;
+        Node *next = NULL;
+
+        while (curr != NULL)
+        {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    void attail(struct Node *&head, struct Node *&tail, int val)
+    {
+        Node *temp = new Node (val);
+        //if list is empty..
+        if (head == NULL)
+        {
+            head = temp;
+            tail = temp;
+            return;
+        }
+        else
+        {
+            tail->next = temp;
+            tail = temp;
+        }
+    }
+
+    struct Node *add(struct Node*first, struct Node* second)
+    {
+        Node *ansHead = NULL;
+        Node *ansTail = NULL;
+        int carry = 0;
+        while (first != NULL || second != NULL || carry != 0)
+        {
+            int val1 = 0;
+            if (first != NULL)
+            {
+                val1 = first->data;
+            }
+
+            int val2 = 0;
+            if (second != NULL)
+            {
+                val2 = second -> data;
+            }
+
+            int sum = carry + val1 + val2;
+
+            int digit = sum % 10;
+
+            attail(ansHead, ansTail, digit);
+            carry = sum / 10;
+
+            if(first != NULL)
+            {
+                first = first->next;
+            }
+
+            if (second != NULL)
+            {
+                second = second -> next;
+            }
+
+        }
+
+        return ansHead;
+
+    }
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // step 1 -> reverse both the linked list..
+        first = reverse(first);
+        second = reverse(second);
+
+        // step 2 -> add both the link list..
+        Node *ans = add(first, second);
+
+        // step3 -> reverse the ans..
+        ans = reverse(ans);
+
+        // step 4 -> return the ans..
+        return ans;
+    }
+};
+*/
