@@ -83,3 +83,6 @@ int main ()
 {
     TwoStack st(5);
 }
+
+
+// time complexity of this ques is O(1);
