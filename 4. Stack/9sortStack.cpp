@@ -53,3 +53,5 @@ int main()
         s.pop();
     }
 }
+
+//Time complexity = O(n^2);
