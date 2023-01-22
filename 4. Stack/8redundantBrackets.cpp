@@ -61,3 +61,5 @@ int main()
         cout << "Non redundand..";
     }
 }
+
+//TC = O(n);
