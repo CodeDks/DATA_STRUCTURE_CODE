@@ -3,21 +3,23 @@
 #include <iostream>
 using namespace std;
 
-int ArrayIntersection(int arr[], int arrd[], int size, int n)
+int ArrayIntersection(int arr[], int arrd[], int size1, int size2)
 {
-    for (int i = 0; i < size; i++)
+    int ans;
+
+    for (int i = 0; i < size1; i++)
     {
         int element = arr[i];
 
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < size2; j++)
         {
             if (element == arrd[j])
             {
-                cout << arrd[j] << " ";
-                break;
+                ans = arrd[j];
             }
         }
     }
+    return ans;
 }
 
 int main()
@@ -28,5 +30,4 @@ int main()
     cout << "The common element in both the array is : " << ArrayIntersection(array, dheeraj, 7, 8);
 }
 
-//ye question stl in c++ padhne ke baad hi solve hoga..
-//This question belongs to lecture no 10..
+// This question belongs to lecture no 10..
